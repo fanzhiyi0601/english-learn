@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <title>Let's Learn English!</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <button id="back-btn" class="back-btn" hidden>&larr;</button>
+    <h1 id="app-title">Let's Learn English!</h1>
+    <div class="header-actions">
+      <button id="notebook-btn" class="icon-btn" title="错题本">📒</button>
+      <div class="coin-badge" id="coin-badge">💰 <span id="coin-count">0</span></div>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- 首页导航 -->
+    <section id="view-home" class="view active">
+      <div class="menu-grid">
+        <button class="menu-card" data-go="alphabet">
+          <span class="menu-icon">🔤</span>
+          <span class="menu-label">ABC</span>
+        </button>
+        <button class="menu-card" data-go="word">
+          <span class="menu-icon">🍎</span>
+          <span class="menu-label">Words</span>
+        </button>
+        <button class="menu-card" data-go="sentence">
+          <span class="menu-icon">💬</span>
+          <span class="menu-label">Sentences</span>
+        </button>
+        <button class="menu-card" data-go="animation">
+          <span class="menu-icon">🎬</span>
+          <span class="menu-label">Animation</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 字母模块 -->
+    <section id="view-alphabet" class="view">
+      <div class="module-toolbar">
+        <button class="practice-btn" data-practice="alphabet">✏️ Practice</button>
+      </div>
+      <div id="alphabet-grid" class="card-grid"></div>
+    </section>
+
+    <!-- 单词模块 -->
+    <section id="view-word" class="view">
+      <div class="module-toolbar">
+        <button class="practice-btn" data-practice="word">✏️ Practice</button>
+        <div id="word-tabs" class="tabs"></div>
+      </div>
+      <div id="word-grid" class="card-grid"></div>
+    </section>
+
+    <!-- 句子模块 -->
+    <section id="view-sentence" class="view">
+      <div class="module-toolbar">
+        <button class="practice-btn" data-practice="sentence">✏️ Practice</button>
+        <div id="sentence-tabs" class="tabs"></div>
+      </div>
+      <div id="sentence-grid" class="card-grid"></div>
+    </section>
+
+    <!-- 动画模块 -->
+    <section id="view-animation" class="view">
+      <div class="anime-list" id="anime-list"></div>
+      <div id="anime-player" class="anime-player" hidden>
+        <h2 id="anime-title" class="anime-title"></h2>
+        <video id="anime-video" class="anime-video" controls autoplay playsinline></video>
+        <p id="anime-placeholder" class="anime-placeholder" hidden>🎬 暂无可播放动画，请稍后再来~</p>
+      </div>
+    </section>
+
+    <!-- 错题本视图 -->
+    <section id="view-notebook" class="view">
+      <div class="notebook-head">
+        <h2 class="notebook-title">📒 错题本</h2>
+      </div>
+      <div id="note-list" class="note-list"></div>
+    </section>
+
+    <!-- 练习问答视图(所有模块共用) -->
+    <section id="view-quiz" class="view">
+      <div class="quiz-panel">
+        <div class="quiz-prompt-row">
+          <p id="quiz-prompt" class="quiz-prompt"></p>
+          <button id="quiz-replay" class="replay-btn" title="再听一次">🔊</button>
+        </div>
+        <!-- 选择题选项区 -->
+        <div id="quiz-options" class="quiz-options"></div>
+        <!-- 听写输入区 -->
+        <div id="dict-box" class="dict-box" hidden>
+          <p id="dict-blanks" class="dict-blanks" hidden></p>
+          <div id="dict-slots" class="dict-slots"></div>
+          <!-- 答案显隐切换(默认隐藏,小眼睛) -->
+          <div class="dict-eyes-row">
+            <button id="dict-eyes" class="dict-eyes-btn" type="button" title="显示/隐藏答案">👁</button>
+          </div>
+          <div id="dict-keyboard" class="dict-keyboard"></div>
+          <button id="dict-submit" class="practice-btn">Submit ✅</button>
+        </div>
+        <p id="quiz-feedback" class="quiz-feedback"></p>
+        <button id="quiz-retry" class="practice-btn retry-btn" hidden>再来一次 🔄</button>
+        <button id="quiz-next" class="practice-btn" hidden>Next ➡️</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 卡片居中预览遮罩 -->
+  <div id="preview-overlay" class="preview-overlay" hidden>
+    <div id="preview-card" class="preview-card"></div>
+  </div>
+
+  <div id="fx-layer" class="fx-layer" aria-hidden="true"></div>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

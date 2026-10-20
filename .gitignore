@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# Editor / IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Tooling / agent config
+.codebuddy/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python (PyCharm sample, not part of this project)
+main.py
+
+# Logs
+*.log

@@ -1,0 +1,13 @@
+{
+  "name": "kids-english-learning",
+  "version": "1.0.0",
+  "description": "面向6岁孩子的英语启蒙展示型网页:字母/单词/句子,含练习问答与金币奖励",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "jsdom": "^29.1.1",
+    "vitest": "^2.1.8"
+  }
+}

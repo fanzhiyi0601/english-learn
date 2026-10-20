@@ -1,0 +1,580 @@
+/* 幼儿友好样式:大号触控目标、大字体、全屏卡片网格 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #fff7e6;
+  --primary: #ff9f43;
+  --good: #2ecc71;
+  --bad: #e74c3c;
+  --card-bg: #fff;
+}
+
+html, body { height: 100%; }
+
+body {
+  font-family: "Comic Sans MS", "Marker Felt", "Segoe Print", sans-serif;
+  background: var(--bg);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 18px;
+  background: #ffcc80;
+  box-shadow: 0 2px 6px rgba(0,0,0,.12);
+  gap: 10px;
+}
+
+.app-header h1 {
+  font-size: 30px;
+  color: #7a4a00;
+  flex: 1;
+  text-align: center;
+}
+
+.back-btn {
+  font-size: 30px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+}
+
+.coin-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: #fff;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #9c7c00;
+  white-space: nowrap;
+}
+
+#app {
+  flex: 1;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.view { display: none; }
+.view.active { display: block; }
+
+/* 首页 */
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  max-width: 720px;
+  margin: 40px auto;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 40px 20px;
+  min-height: 180px;
+  border: none;
+  border-radius: 28px;
+  background: var(--card-bg);
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  cursor: pointer;
+  font-size: 26px;
+  color: #333;
+  transition: transform .08s;
+}
+.menu-card:active { transform: scale(.96); }
+.menu-icon { font-size: 64px; }
+.menu-label { font-weight: bold; }
+
+/* 卡片网格 */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+  padding: 8px 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 22px 10px;
+  min-height: 130px;
+  border: none;
+  border-radius: 20px;
+  background: var(--card-bg);
+  box-shadow: 0 3px 8px rgba(0,0,0,.1);
+  cursor: pointer;
+  font-size: 20px;
+  transition: transform .08s;
+}
+.card:active { transform: scale(.94); }
+
+.card-letter {
+  font-size: 52px;
+  font-weight: bold;
+  color: #e17055;
+}
+.card-emoji { font-size: 34px; }
+.card-emoji.big { font-size: 48px; }
+.card-word { font-weight: bold; }
+
+/* 工具栏(练习按钮 + 分类页签) */
+.module-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.practice-btn {
+  font-size: 24px;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 999px;
+  background: var(--primary);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,.15);
+}
+.practice-btn:active { transform: scale(.95); }
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.tab {
+  font-size: 22px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 999px;
+  background: #ffe0b3;
+  cursor: pointer;
+  color: #7a4a00;
+}
+.tab.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+/* 问答面板 */
+.quiz-panel {
+  max-width: 640px;
+  margin: 20px auto;
+  text-align: center;
+}
+.quiz-prompt {
+  font-size: 32px;
+  margin: 20px 0 24px;
+}
+.quiz-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+.quiz-option {
+  font-size: 26px;
+  padding: 18px 28px;
+  min-width: 140px;
+  border: none;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,.12);
+  cursor: pointer;
+}
+.quiz-option:active { transform: scale(.94); }
+.quiz-option:disabled { opacity: .6; cursor: default; }
+
+.quiz-feedback {
+  font-size: 28px;
+  margin-top: 22px;
+  font-weight: bold;
+}
+.quiz-feedback.good { color: var(--good); }
+.quiz-feedback.bad { color: var(--bad); }
+
+#quiz-next { margin-top: 18px; }
+
+/* 金币特效层 */
+.fx-layer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+.fx-coin {
+  position: fixed;
+  font-size: 34px;
+  pointer-events: none;
+  animation: coin-fly .8s ease-out forwards;
+  will-change: transform, opacity;
+}
+@keyframes coin-fly {
+  0%   { opacity: 1; transform: translate(0,0) scale(1); }
+  100% { opacity: 0; transform: translate(var(--dx,0), var(--dy,-80px)) scale(.6); }
+}
+
+/* 顶部导航操作区 */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.icon-btn {
+  font-size: 24px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.icon-btn:active { transform: scale(.94); }
+
+/* 卡片预览遮罩 */
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.preview-overlay[hidden] { display: none; }
+.preview-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: #fff;
+  border-radius: 32px;
+  padding: 56px 64px;
+  min-width: 240px;
+  min-height: 240px;
+  max-width: 88vw;
+  box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  animation: preview-pop .18s ease-out;
+  cursor: default;
+}
+@keyframes preview-pop {
+  0%   { transform: scale(.75); opacity: .5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.preview-card .card-letter { font-size: 110px; }
+.preview-card .card-emoji { font-size: 88px; }
+.preview-card .card-emoji.big { font-size: 110px; }
+.preview-card .card-word { font-size: 42px; }
+
+/* 动画模块 */
+.anime-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  margin: 20px auto;
+  max-width: 800px;
+}
+.anime-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 32px;
+  border: none;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,.1);
+  cursor: pointer;
+  font-size: 22px;
+  color: #333;
+}
+.anime-item .anime-icon { font-size: 52px; }
+.anime-player {
+  max-width: 860px;
+  margin: 10px auto;
+  text-align: center;
+}
+.anime-title {
+  font-size: 30px;
+  color: #7a4a00;
+  margin-bottom: 14px;
+}
+.anime-video {
+  width: 100%;
+  max-height: 62vh;
+  border-radius: 20px;
+  background: #000;
+  box-shadow: 0 6px 20px rgba(0,0,0,.2);
+}
+.anime-placeholder {
+  font-size: 26px;
+  color: #999;
+  padding: 60px 20px;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,.08);
+}
+
+/* 错题本 */
+.notebook-head {
+  text-align: center;
+  margin: 10px 0 20px;
+}
+.notebook-title {
+  font-size: 30px;
+  color: #7a4a00;
+}
+.note-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 720px;
+  margin: 0 auto;
+}
+.note-item {
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 3px 8px rgba(0,0,0,.08);
+  font-size: 20px;
+  line-height: 1.6;
+}
+.note-item .note-prompt { font-size: 18px; color: #888; }
+.note-item .note-answer { color: var(--good); font-weight: bold; }
+.note-item .note-wrong { color: var(--bad); font-weight: bold; }
+.note-item .note-meta { font-size: 14px; color: #aaa; margin-top: 4px; }
+.note-empty {
+  text-align: center;
+  font-size: 24px;
+  color: #aaa;
+  padding: 60px 20px;
+}
+
+/* 听写输入区 */
+.dict-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+.dict-box[hidden] { display: none; }
+.dict-blanks {
+  font-size: 30px;
+  letter-spacing: 6px;
+  color: #999;
+  font-weight: bold;
+}
+.dict-target {
+  min-width: 280px;
+  min-height: 64px;
+  padding: 14px 22px;
+  font-size: 34px;
+  font-weight: bold;
+  color: #333;
+  background: #fff;
+  border-radius: 16px;
+  border: 3px dashed var(--primary);
+  outline: none;
+  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.dict-target:focus { border-style: solid; }
+.dict-target.ok { border-color: var(--good); color: var(--good); }
+.dict-target.err { border-color: var(--bad); color: var(--bad); }
+
+/* 虚拟软键盘 */
+.dict-keyboard {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(42px, 1fr));
+  gap: 8px;
+  max-width: 520px;
+  width: 100%;
+  margin-top: 6px;
+}
+.key {
+  font-size: 22px;
+  font-weight: bold;
+  padding: 12px 0;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,.12);
+  cursor: pointer;
+  color: #333;
+}
+.key:active { transform: scale(.92); }
+.key.wide { grid-column: span 2; }
+
+/* 练习提示行(题目 + 重播) */
+.quiz-prompt-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+.quiz-prompt-row .quiz-prompt { margin: 0; }
+
+.replay-btn {
+  font-size: 26px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  background: #ffe0b3;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,.12);
+  flex: none;
+}
+.replay-btn:active { transform: scale(.92); }
+
+/* 预览中的重播按钮 */
+.preview-replay {
+  font-size: 24px;
+  margin-top: 8px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 999px;
+  background: #ffe0b3;
+  cursor: pointer;
+  color: #7a4a00;
+  box-shadow: 0 2px 5px rgba(0,0,0,.1);
+}
+.preview-replay:active { transform: scale(.94); }
+
+/* 重试按钮 */
+.retry-btn { background: #ffb74d; }
+
+/* 听写逐步输入格 */
+.dict-slots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 640px;
+  width: 100%;
+}
+.dict-slot {
+  width: 72px;
+  height: 64px;
+  font-size: 34px;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  background: #fff;
+  border-radius: 14px;
+  border: 3px dashed var(--primary);
+  outline: none;
+}
+.dict-slot::placeholder { color: #ccc; font-size: 22px; }
+.dict-slot:focus { border-style: solid; background: #fffdf5; }
+.dict-slot.ok { border-color: var(--good); color: var(--good); }
+.dict-slot.err { border-color: var(--bad); color: var(--bad); }
+
+/* 听写:词卡片 + 字母格 */
+.dict-slots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  row-gap: 20px;
+  max-width: 680px;
+  width: 100%;
+}
+.dict-word {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border: 3px dashed var(--primary);
+  border-radius: 14px;
+  background: #fff;
+}
+.dict-word.ok { border-color: var(--good); }
+.dict-word.err { border-color: var(--bad); }
+.dict-word-answer {
+  font-size: 14px;
+  color: #aaa;
+  min-height: 16px;
+}
+.dict-chars {
+  display: flex;
+  gap: 4px;
+}
+.dict-char {
+  width: 40px;
+  height: 48px;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: lowercase;
+  color: #333;
+  background: #fffdf5;
+  border: none;
+  border-bottom: 4px solid var(--primary);
+  border-radius: 8px 8px 0 0;
+  outline: none;
+}
+.dict-char::placeholder { color: #e0cfa0; }
+.dict-char:focus { background: #fff3d6; }
+.dict-char.ok { border-bottom-color: var(--good); color: var(--good); }
+.dict-char.err { border-bottom-color: var(--bad); color: var(--bad); }
+
+/* 答案显隐小眼睛(task 11.4) */
+.dict-eyes-row {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: 640px;
+}
+
+.dict-eyes-btn {
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  line-height: 1;
+  border: 2px solid var(--primary);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.dict-eyes-btn:hover { background: var(--bg); }
+
+.dict-eyes-btn.on { background: var(--primary); }
